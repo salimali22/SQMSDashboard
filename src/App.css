@@ -1,0 +1,29 @@
+.fluid{
+  background-color: #11142E;
+  color: white;
+}
+
+.header{
+  background-color: #242b6d;
+  border-bottom:2px solid white;
+}
+.name{
+  border-bottom: 7px double white;
+  border-bottom-style: double;
+}
+.name2{
+  border-bottom: 2px solid white;
+  margin-bottom: 50px;
+  padding-bottom: 20px;
+}
+.active-floor{
+  background-color: #5140FF;
+}
+
+.inactive-floor{
+  background-color: #42FFFF;
+}
+
+.side{
+  border-right: 2px solid white;
+}
