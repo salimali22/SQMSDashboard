@@ -38,6 +38,8 @@ export const Login = ()=>{
     const errorCode = error.code;
     const errorMessage = error.message;
   });
+  
+  console.log(state);
     setEmail("");
     setPassword("");
     e.preventDefault();

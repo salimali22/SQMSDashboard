@@ -2,6 +2,7 @@ import { getData } from '../Firebase/firebase.js';
 import CanvasJSReact from '../lib/canvasjs.react.js';
 
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 
 var CanvasJS = CanvasJSReact.CanvasJS;
@@ -44,11 +45,12 @@ var chartData = [];
         "VS031  Jump Stitch"  : 0,
       };
 export const Defects=()=>{
+       const defectsdata = useSelector((state)=>state.data);
         Object.keys(defects).forEach((key)=>defects[key]=0)
         // defects = initialdefects;
         console.log("Defects Report Top");
         console.log(defects);
-        var data = getData();
+        var data = defectsdata;
         console.log(data);
         data = Object.values(data);
 

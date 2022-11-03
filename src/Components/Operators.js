@@ -1,6 +1,11 @@
 
 import { Tooltip, TooltipProps, styled,tooltipClasses, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
 var Icon = (props)=>{
+    const data = useSelector((state)=>state.data);
+    const name = props;
+    console.log("In Icon");
+    console.log(props);
     var defects = 0;
     if(props!=null && props.color==="yellow"){
         defects = 2;
@@ -20,7 +25,7 @@ return(
 <HtmlTooltip
         title={
           <>
-            <Typography color="inherit">Saima Bibi</Typography>
+            <Typography color="inherit">{props.data}</Typography>
             <b>{"Pocket Hamming"}</b> <br /> <b>{defects}</b> <em>{"Defects"}</em>&nbsp;<u> {'in 1'}<sup>{"st"}</sup>{"Audit Report"}</u><br />
             {(props.color!=null ? props.color : "Black")}
           </>
@@ -50,69 +55,62 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   }));
   
 
-var Icons = (props)=>{
+const Icons = (props)=>{
+    console.log("In the Icons");
+    console.log(props);
     var rows = []
         for(var i = 0; i<6 ; i++){
-            if(props.user!=null && parseInt(props.user)-1 === i){
-                rows.push(<Icon color= {props.color} />)  
+            if(props[i]){
+                
             }
-            else{
-            rows.push(<Icon />)    
-            } 
+            if(props[i]){
+              rows.push(<Icon data={props[i]} />)      
+            }
+            
+             
          } 
       
-//  console.log(rows);
- return rows;
+ console.log(rows);
+
+ return (  <div className="row  my-2">
+ <div className="col d-flex justify-content-around">
+     {rows}
+ </div>
+     
+ </div>);
 }
 
 export const Operator = ()=>{
+    var iconsComp = [];
+    var data = useSelector((state)=>state.data);
+    console.log("Operators");
+    var dataKeys = Object.keys(data);
+    console.log("Index Of")
+    delete dataKeys[dataKeys.indexOf("Initial Detail")];
+    const index = dataKeys.indexOf("Initial Detail");
+if (index > -1) { // only splice array when item is found
+  dataKeys.splice(index, 1); // 2nd parameter means remove one item only
+}
+    console.log(dataKeys.indexOf("Initial Detail"));
+    console.log(dataKeys);
+    var dataSplit = [];
+    for (let i = 0; i < dataKeys.length; i += 6) {
+        const chunk = dataKeys.slice(i, i + 6);
+        dataSplit.push(chunk);
+    }
+    console.log(dataSplit);
+    console.log(dataKeys);
+    console.log("Before Return");
 
-    return(
-        <>
-        <div className="row  my-2">
-        <div className="col d-flex justify-content-around">
-            <Icons />
-        </div>
-            
-        </div>
-        <div className="row my-2">
-        <div className="col d-flex justify-content-around">
-            <Icons />
-        </div>
-            
-        </div>
-        <div className="row my-2">
-        <div className="col d-flex justify-content-around">
-            <Icons user="3" color="yellow"/>
-        </div>
-            
-        </div>
-        <div className="row my-2">
-        <div className="col d-flex justify-content-around">
-            <Icons />
-        </div>
-            
-        </div>
-        <div className="row my-2">
-        <div className="col d-flex justify-content-around">
-            <Icons user="2" color="red"/>
-        </div>
-            
-        </div>
-        <div className="row my-2">
-        <div className="col d-flex justify-content-around">
-            <Icons user="6" color="blue"/>
-        </div>
-            
-        </div>
-        <div className="row my-2">
-        <div className="col d-flex justify-content-around">
-            <Icons user="6" color="blue"/>
-        </div>
-            
-        </div>
+
+        console.log("In return")
+           dataSplit.forEach((a)=>{
+            console.log("In For Each");
+            iconsComp.push(Icons(a))
+            console.log(iconsComp);
+        }
+
+        )
+        return (iconsComp); 
         
-        </>
-
-    );
 }
